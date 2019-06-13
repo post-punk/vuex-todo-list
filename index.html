@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Todo List</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+	<body>
+		<div class="container">
+			<h1>Todo Lista</h1>
+      <p>Click or tap on a <i>Todo</i> to edit it;</p>
+      <p>
+        '<span >&#10003</span>' symbol to toggle completion;
+              </p>
+      <p>'<span >&#10006</span>' to delete it.</p>
+			<div id="app"></div>
+		</div>
+	<template id="todo-list">
+		<ul class="tasks">
+			<li v-for="todo in todos">
+        <input 
+				:class="{completed: todo.completed}"
+				class="task"
+        v-on:keyup.enter="$event.target.blur()"
+        v-model="todo.task">
+        <button class="check-default" :class="{check: todo.completed}" @click="toggleTodo(todo.id)">&#10003</button>
+        <button id="delete" @click="deleteTodo(todo.id)">&#10006</button>
+        
+      </input></li>
+		</ul>
+	</template>
+	<template id="app-template">
+		<div>
+			<form @submit.prevent="addTodo">
+				<input class="todo-input" type="text" placeholder="Enter a new task" v-model="task" />
+        
+			</form>
+      
+			<todo-list />
+		</div>
+	</template>
+	<script type="text/javascript" src="https://unpkg.com/vue@2.5.3/dist/vue.min.js"></script>
+	<script src="https://unpkg.com/vuex@3.0.1/dist/vuex.min.js"></script>
+	<script type="text/javascript" src="app.js"></script>
+	</body>
+</html>
